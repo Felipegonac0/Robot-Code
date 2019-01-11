@@ -18,7 +18,6 @@ class MyRobot(wpilib.TimedRobot):
         should be used for any initialization code.
         """ 
         setup_for_robot(self)
-        read_input()
 
         self.front_left_motor = wpilib.Spark(0)
         self.rear_left_motor = wpilib.Spark(1)
@@ -33,28 +32,28 @@ class MyRobot(wpilib.TimedRobot):
         self.drive = wpilib.drive.DifferentialDrive(self.left_motor, self.right_motor)
 
     def teleopPeriodic(self):
-        
+
+        read_input()
+
+
+
+
         x = state["chasis_x_mov"]
         y = state["chasis_y_mov"]
+
+
         
-        if state["button_y_on"] == True:
+        if state["button_y_on"]:
             if self.sensor_1.get():
-                self.left_motor.set(-.7)
-                self.right_motor.set(.7)
+                self.drive.arcadeDrive(0.7, 0)
             elif self.sensor_2.get(): 
-                self.left_motor.set(-.3)
-                self.right_motor.set(.3)  
+                self.drive.arcadeDrive(0.4, 0)
             elif self.sensor_4.get(): 
-                self.right_motor.set(-.3)
-                self.left_motor.set(.3)
+                self.drive.arcadeDrive(0, 0.4)
             elif self.sensor_5.get(): 
-                self.right_motor.set(-.7)
-                self.left_motor.set(.7)
+                self.drive.arcadeDrive(0, 0.7)
             elif self.sensor_3.get(): 
-                self.right_motor.set(0)
-                self.left_motor.set(0)
-            else:
-                print("nada")
+                self.drive.arcadeDrive(0, 0)
         else: 
             self.drive.arcadeDrive(y, x)
 

@@ -15,7 +15,13 @@ def read_input ():
 	y_button = stick.getRawButton(3)
 	state["button_y_on"] = y_button
 	a_button = stick.getRawButton(1)
-	state["line_follow"] = y_button
+
+	x = stick.getX()
+	state["chasis_x_mov"] = x
+
+	y = stick.getY()
+	state["chasis_y_mov"] = y
+
 
 
 
